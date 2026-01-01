@@ -1,0 +1,42 @@
+# ===============================
+# Crunch Bacon – Robots.txt
+# Purpose: Maximum crawl efficiency + SEO visibility
+# ===============================
+
+User-agent: *
+Allow: /
+
+# Block junk / non-content paths
+Disallow: /api/
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /login/
+Disallow: /auth/
+Disallow: /account/
+Disallow: /settings/
+Disallow: /private/
+Disallow: /*?*
+Disallow: /*&*
+Disallow: /*utm_*
+Disallow: /*ref=*
+
+# Allow core assets
+Allow: /assets/
+Allow: /images/
+Allow: /fonts/
+Allow: /src/
+
+# Explicitly allow JS/CSS (critical for React / Vite)
+Allow: /*.js$
+Allow: /*.css$
+Allow: /*.json$
+Allow: /*.svg$
+Allow: /*.webp$
+Allow: /*.jpg$
+Allow: /*.png$
+
+# Crawl control (optional tuning)
+Crawl-delay: 5
+
+# Sitemap
+Sitemap: https://crunchbacon.com/sitemap.xml
