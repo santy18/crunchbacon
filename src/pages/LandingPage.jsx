@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Turnstile } from '@marsidev/react-turnstile'
 import { 
   Menu, 
   X, 
@@ -348,7 +349,7 @@ export default function App() {
                       <input type="url" name="websiteurl" required className="w-full border rounded-[14px] px-4 py-3 focus:outline-none focus:ring-2 transition-all placeholder-white/20" 
                              style={{ backgroundColor: colors.bgElevated, borderColor: colors.borderSubtle, color: colors.textPrimary, '--tw-ring-color': 'rgba(225,29,72,0.5)' }} placeholder="https://currentsite.com" />
                     </div>
-                    
+                    <Turnstile siteKey='0x4AAAAAACKIOHbJNUtRwZAu' />
                     <button type="submit" className="w-full font-bold rounded-[14px] py-4 hover:bg-white transition-colors mt-2" style={{ backgroundColor: colors.textPrimary, color: colors.bgBase }}>
                       Send My Score
                     </button>
@@ -689,6 +690,8 @@ export default function App() {
                       <textarea rows="4" name="project_notes" className="w-full border rounded-[14px] px-4 py-3 focus:outline-none focus:ring-2 transition-all" 
                                 style={{ backgroundColor: colors.bgCard, borderColor: colors.borderSubtle, color: colors.textPrimary, '--tw-ring-color': 'rgba(225,29,72,0.5)' }} placeholder="What don't you like about your current site?"></textarea>
                     </div>
+
+                    <Turnstile siteKey='0x4AAAAAACKIOHbJNUtRwZAu' />
 
                     <button type="submit" className="w-full px-8 py-4 rounded-[14px] font-bold text-lg hover:bg-[#F43F5E] transition-colors shadow-[0_0_20px_rgba(225,29,72,0.3)]"
                             style={{ backgroundColor: colors.accentPrimary, color: colors.bgBase }}>
