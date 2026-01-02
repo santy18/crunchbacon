@@ -22,6 +22,9 @@ import {
   Linkedin 
 } from 'lucide-react';
 
+const CRUNCHBACON_REDESIGN_HOOK = 'https://n8n.crunchbacon.com/webhook/502a046a-62a0-4c9a-8e62-87739302016a';
+// const CRUNCHBACON_REDESIGN_HOOK = 'https://n8n.crunchbacon.com/webhook-test/502a046a-62a0-4c9a-8e62-87739302016a';
+
 export default function App() {
   // State
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -74,6 +77,59 @@ export default function App() {
   // FAQ Toggle
   const toggleFaq = (index) => {
     setActiveFaq(activeFaq === index ? null : index);
+  };
+
+  const handleHeroFormSubmit = async (e) => {
+    e.preventDefault();
+    console.log('Submitting hero form...');
+    const formData = new FormData(e.currentTarget);
+    try {
+      const response = await fetch(CRUNCHBACON_REDESIGN_HOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.get('name'),
+          email: formData.get('email'),
+          websiteurl: formData.get('websiteurl'),
+          source: "redesign-score"
+        })
+      });
+
+      if (response.ok) {
+        setHeroFormSubmitted(true);
+      } else {
+        console.error('Failed to submit hero form', response.status);
+      }
+    } catch (error) {
+      console.error('Failed to submit hero form', error);
+    }
+  };
+
+  const handleContactFormSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    try {
+      const response = await fetch(CRUNCHBACON_REDESIGN_HOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.get('name'),
+          email: formData.get('email'),
+          websiteurl: formData.get('websiteurl'),
+          phone: formData.get('phone'),
+          business_type: formData.get('business_type'),
+          project_notes: formData.get('project_notes'),
+    })
+      });
+
+      if (response.ok) {
+        setContactFormSubmitted(true);
+      } else {
+        console.error('Failed to submit contact form', response.status);
+      }
+    } catch (error) {
+      console.error('Failed to submit contact form', error);
+    }
   };
 
   return (
@@ -276,20 +332,20 @@ export default function App() {
                 </div>
                 
                 {!heroFormSubmitted ? (
-                  <form onSubmit={(e) => { e.preventDefault(); setHeroFormSubmitted(true); }} className="space-y-4">
+                  <form onSubmit={handleHeroFormSubmit} className="space-y-4">
                     <div>
                       <label className="block text-sm font-medium mb-1" style={{ color: colors.textSecondary }}>Name</label>
-                      <input type="text" required className="w-full border rounded-[14px] px-4 py-3 focus:outline-none focus:ring-2 transition-all placeholder-white/20" 
+                      <input type="text" name="name" required className="w-full border rounded-[14px] px-4 py-3 focus:outline-none focus:ring-2 transition-all placeholder-white/20" 
                              style={{ backgroundColor: colors.bgElevated, borderColor: colors.borderSubtle, color: colors.textPrimary, '--tw-ring-color': 'rgba(225,29,72,0.5)' }} placeholder="Jane Doe" />
                     </div>
                     <div>
                       <label className="block text-sm font-medium mb-1" style={{ color: colors.textSecondary }}>Email</label>
-                      <input type="email" required className="w-full border rounded-[14px] px-4 py-3 focus:outline-none focus:ring-2 transition-all placeholder-white/20" 
+                      <input type="email" name="email" required className="w-full border rounded-[14px] px-4 py-3 focus:outline-none focus:ring-2 transition-all placeholder-white/20" 
                              style={{ backgroundColor: colors.bgElevated, borderColor: colors.borderSubtle, color: colors.textPrimary, '--tw-ring-color': 'rgba(225,29,72,0.5)' }} placeholder="jane@company.com" />
                     </div>
                     <div>
                       <label className="block text-sm font-medium mb-1" style={{ color: colors.textSecondary }}>Website URL</label>
-                      <input type="url" required className="w-full border rounded-[14px] px-4 py-3 focus:outline-none focus:ring-2 transition-all placeholder-white/20" 
+                      <input type="url" name="websiteurl" required className="w-full border rounded-[14px] px-4 py-3 focus:outline-none focus:ring-2 transition-all placeholder-white/20" 
                              style={{ backgroundColor: colors.bgElevated, borderColor: colors.borderSubtle, color: colors.textPrimary, '--tw-ring-color': 'rgba(225,29,72,0.5)' }} placeholder="https://currentsite.com" />
                     </div>
                     
@@ -589,16 +645,16 @@ export default function App() {
                 <p className="mb-8" style={{ color: colors.textSecondary }}>Tell us about your site and goals.</p>
 
                 {!contactFormSubmitted ? (
-                  <form onSubmit={(e) => { e.preventDefault(); setContactFormSubmitted(true); }} className="space-y-6">
+                  <form onSubmit={handleContactFormSubmit} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
                         <label className="block text-sm font-medium mb-2" style={{ color: colors.textSecondary }}>Full Name</label>
-                        <input type="text" required className="w-full border rounded-[14px] px-4 py-3 focus:outline-none focus:ring-2 transition-all" 
+                        <input type="text" name="name" required className="w-full border rounded-[14px] px-4 py-3 focus:outline-none focus:ring-2 transition-all" 
                                style={{ backgroundColor: colors.bgCard, borderColor: colors.borderSubtle, color: colors.textPrimary, '--tw-ring-color': 'rgba(225,29,72,0.5)' }} />
                       </div>
                       <div>
                         <label className="block text-sm font-medium mb-2" style={{ color: colors.textSecondary }}>Email</label>
-                        <input type="email" required className="w-full border rounded-[14px] px-4 py-3 focus:outline-none focus:ring-2 transition-all" 
+                        <input type="email" name="email" required className="w-full border rounded-[14px] px-4 py-3 focus:outline-none focus:ring-2 transition-all" 
                                style={{ backgroundColor: colors.bgCard, borderColor: colors.borderSubtle, color: colors.textPrimary, '--tw-ring-color': 'rgba(225,29,72,0.5)' }} />
                       </div>
                     </div>
@@ -606,19 +662,19 @@ export default function App() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
                         <label className="block text-sm font-medium mb-2" style={{ color: colors.textSecondary }}>Phone (Optional)</label>
-                        <input type="tel" className="w-full border rounded-[14px] px-4 py-3 focus:outline-none focus:ring-2 transition-all" 
+                        <input type="tel" name="phone" className="w-full border rounded-[14px] px-4 py-3 focus:outline-none focus:ring-2 transition-all" 
                                style={{ backgroundColor: colors.bgCard, borderColor: colors.borderSubtle, color: colors.textPrimary, '--tw-ring-color': 'rgba(225,29,72,0.5)' }} />
                       </div>
                       <div>
                         <label className="block text-sm font-medium mb-2" style={{ color: colors.textSecondary }}>Website URL</label>
-                        <input type="url" className="w-full border rounded-[14px] px-4 py-3 focus:outline-none focus:ring-2 transition-all" 
+                        <input type="url" name="websiteurl" className="w-full border rounded-[14px] px-4 py-3 focus:outline-none focus:ring-2 transition-all" 
                                style={{ backgroundColor: colors.bgCard, borderColor: colors.borderSubtle, color: colors.textPrimary, '--tw-ring-color': 'rgba(225,29,72,0.5)' }} />
                       </div>
                     </div>
 
                     <div>
                       <label className="block text-sm font-medium mb-2" style={{ color: colors.textSecondary }}>Business Type</label>
-                      <select className="w-full border rounded-[14px] px-4 py-3 focus:outline-none focus:ring-2 transition-all" 
+                      <select name="business_type" className="w-full border rounded-[14px] px-4 py-3 focus:outline-none focus:ring-2 transition-all" 
                               style={{ backgroundColor: colors.bgCard, borderColor: colors.borderSubtle, color: colors.textPrimary, '--tw-ring-color': 'rgba(225,29,72,0.5)' }}>
                         <option>Service Business</option>
                         <option>E-Commerce</option>
@@ -630,7 +686,7 @@ export default function App() {
 
                     <div>
                       <label className="block text-sm font-medium mb-2" style={{ color: colors.textSecondary }}>Project Notes</label>
-                      <textarea rows="4" className="w-full border rounded-[14px] px-4 py-3 focus:outline-none focus:ring-2 transition-all" 
+                      <textarea rows="4" name="project_notes" className="w-full border rounded-[14px] px-4 py-3 focus:outline-none focus:ring-2 transition-all" 
                                 style={{ backgroundColor: colors.bgCard, borderColor: colors.borderSubtle, color: colors.textPrimary, '--tw-ring-color': 'rgba(225,29,72,0.5)' }} placeholder="What don't you like about your current site?"></textarea>
                     </div>
 
