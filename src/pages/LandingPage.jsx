@@ -735,7 +735,7 @@ export default function App() {
                       <MapPin size={16} color={colors.accentPrimary} /> Miami, FL, 33174
                     </div>
                     <div className="flex items-center gap-3 text-sm" style={{ color: colors.textSecondary }}>
-                      <Mail size={16} color={colors.accentPrimary} /> hello@crunchbacon.com
+                      <Mail size={16} color={colors.accentPrimary} /> santygilenterprisesllc@gmail.com
                     </div>
                     <div className="flex items-center gap-3 text-sm" style={{ color: colors.textSecondary }}>
                       <Phone size={16} color={colors.accentPrimary} /> (786) 474-4913
@@ -779,7 +779,7 @@ export default function App() {
             <div>
               <h4 className="font-bold mb-4" style={{ color: colors.textPrimary }}>Contact</h4>
               <ul className="space-y-2 text-sm" style={{ color: colors.textMuted }}>
-                <li>hello@crunchbacon.com</li>
+                <li>santygilenterprisesllc@gmail.com</li>
                 <li>Miami, FL, 33174</li>
               </ul>
             </div>
