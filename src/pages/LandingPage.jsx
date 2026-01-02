@@ -275,7 +275,7 @@ export default function App() {
               <div className="inline-flex items-center space-x-2 font-bold tracking-wider text-xs uppercase px-3 py-1 rounded-full border" 
                    style={{ color: colors.accentSecondary, backgroundColor: 'rgba(245,158,11,0.1)', borderColor: 'rgba(245,158,11,0.2)' }}>
                 <MapPin size={12} />
-                <span>Miami, FL • Website Redesign</span>
+                <span>Miami, FL, 33174 • Website Redesign</span>
               </div>
               
               <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]" style={{ color: colors.textPrimary }}>
@@ -732,13 +732,13 @@ export default function App() {
 
                   <div className="border-t pt-6 space-y-3" style={{ borderColor: colors.borderSubtle }}>
                     <div className="flex items-center gap-3 text-sm" style={{ color: colors.textSecondary }}>
-                      <MapPin size={16} color={colors.accentPrimary} /> Miami, FL
+                      <MapPin size={16} color={colors.accentPrimary} /> Miami, FL, 33174
                     </div>
                     <div className="flex items-center gap-3 text-sm" style={{ color: colors.textSecondary }}>
                       <Mail size={16} color={colors.accentPrimary} /> hello@crunchbacon.com
                     </div>
                     <div className="flex items-center gap-3 text-sm" style={{ color: colors.textSecondary }}>
-                      <Phone size={16} color={colors.accentPrimary} /> (305) 555-0123
+                      <Phone size={16} color={colors.accentPrimary} /> (786) 474-4913
                     </div>
                   </div>
                 </div>
@@ -780,7 +780,7 @@ export default function App() {
               <h4 className="font-bold mb-4" style={{ color: colors.textPrimary }}>Contact</h4>
               <ul className="space-y-2 text-sm" style={{ color: colors.textMuted }}>
                 <li>hello@crunchbacon.com</li>
-                <li>Miami, FL</li>
+                <li>Miami, FL, 33174</li>
               </ul>
             </div>
           </div>
