@@ -26,6 +26,10 @@ import {
 const CRUNCHBACON_REDESIGN_HOOK = 'https://n8n.crunchbacon.com/webhook/502a046a-62a0-4c9a-8e62-87739302016a';
 // const CRUNCHBACON_REDESIGN_HOOK = 'https://n8n.crunchbacon.com/webhook-test/502a046a-62a0-4c9a-8e62-87739302016a';
 
+import santyGilImg from "../assets/santygil.png"
+import mjmImg from "../assets/mjm.png"
+import techtotzImg from "../assets/techtotz.png"
+
 export default function App() {
   // State
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -408,14 +412,19 @@ export default function App() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
-                { title: "FinTech Dashboard", tag1: "Redesign", tag2: "Tech", outcomes: ["40% increase in signups", "Mobile-first adaptation", "Dark mode implementation"] },
-                { title: "Miami Apparel", tag1: "E-Commerce", tag2: "Fashion", outcomes: ["2x Faster load times", "Shopify integration", "Custom product galleries"] },
-                { title: "Legal Consultancy", tag1: "Service", tag2: "Local", outcomes: ["Lead generation funnel", "SEO restructuring", "Authority building UI"] }
+                { title: "santygil.com", tag1: "Redesign", tag2: "Tech", outcomes: ["40% increase in signups", "Mobile-first adaptation", "Dark mode implementation"], img: santyGilImg },
+                { title: "techtotz.com ", tag1: "service", tag2: "Tech", outcomes: ["2x Faster load times", "Shopify integration", "Custom product galleries"], img: techtotzImg },
+                { title: "miamijunkmovers.com", tag1: "Service", tag2: "Tech", outcomes: ["Lead generation funnel", "SEO restructuring", "Authority building UI"], img: mjmImg }
               ].map((project, idx) => (
                 <article key={idx} className="border rounded-[18px] overflow-hidden hover-lift flex flex-col h-full shadow-xl" style={{ backgroundColor: colors.bgCard, borderColor: colors.borderSubtle }}>
                   <div className="aspect-[16/10] relative overflow-hidden group" style={{ backgroundColor: colors.bgElevated }}>
                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
                       <ImageIcon size={48} className="opacity-20" color={colors.textMuted} />
+                        <img
+                          src={project.img}
+                          alt="Case study preview"
+                          className="w-full h-full object-cover"
+                        />
                     </div>
                   </div>
                   <div className="p-6 flex-1 flex flex-col">
@@ -431,7 +440,15 @@ export default function App() {
                         </li>
                       ))}
                     </ul>
-                    <button className="block w-full py-3 rounded-[14px] border font-medium hover:bg-white/5 transition-colors" style={{ borderColor: colors.borderSubtle, color: colors.textPrimary }}>View Case Study</button>
+                    <a
+                      href={`https://${project.title.trim()}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full py-3 rounded-[14px] border font-medium hover:bg-white/5 transition-colors text-center"
+                      style={{ borderColor: colors.borderSubtle, color: colors.textPrimary }}
+                    >
+                      visit
+                    </a>
                   </div>
                 </article>
               ))}
