@@ -50,10 +50,16 @@ function StoryStage({
   // Scroll-linked video scrubbing writes v.currentTime on every scroll frame,
   // which is decode-heavy and janks touch scrolling badly on phones/tablets.
   // Coarse-pointer devices skip the video entirely and just show the poster.
-  const [coarsePointer, setCoarsePointer] = useState(false);
+  // Read synchronously on first render (not in an effect) — this component
+  // only ever renders client-side, and if the video briefly mounted before
+  // flipping off, the preload-ready effect below would attach its
+  // loadeddata/error listeners to a node that gets unmounted a tick later,
+  // so onReady(i) would never fire and the loading bar would stick at 0.
+  const [coarsePointer, setCoarsePointer] = useState(
+    () => window.matchMedia("(pointer: coarse)").matches
+  );
   useEffect(() => {
     const mq = window.matchMedia("(pointer: coarse)");
-    setCoarsePointer(mq.matches);
     const handler = (e: MediaQueryListEvent) => setCoarsePointer(e.matches);
     mq.addEventListener("change", handler);
     return () => mq.removeEventListener("change", handler);
