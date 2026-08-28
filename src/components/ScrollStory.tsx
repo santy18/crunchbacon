@@ -47,6 +47,18 @@ function StoryStage({
   const activeRef = useRef(0);
   const [active, setActive] = useState(0);
 
+  // Scroll-linked video scrubbing writes v.currentTime on every scroll frame,
+  // which is decode-heavy and janks touch scrolling badly on phones/tablets.
+  // Coarse-pointer devices skip the video entirely and just show the poster.
+  const [coarsePointer, setCoarsePointer] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(pointer: coarse)");
+    setCoarsePointer(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setCoarsePointer(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: wrapperRef,
     offset: ["start start", "end end"],
@@ -173,7 +185,7 @@ function StoryStage({
                 style={{ backgroundImage: `url(${ch.staticImage})` }}
               />
 
-              {ch.videoUrl && (
+              {ch.videoUrl && !coarsePointer && (
                 <video
                   ref={(el) => {
                     videoRefs.current[i] = el;
