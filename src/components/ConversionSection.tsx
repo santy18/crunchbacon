@@ -10,11 +10,12 @@ const SERVICES = [
   { icon: "△", title: "Testing & Iteration", desc: "Validation cycles and refinement sprints until the prototype proves itself." },
 ];
 
-// Placeholder testimonials — swap in real client quotes before launch.
-const REVIEWS = [
-  { name: "Maria R.", location: "Founder, Reef & Root", stars: 5, text: "We walked in with a napkin sketch and walked out with a working prototype in under three weeks. CrunchBacon moves at the speed a startup actually needs." },
-  { name: "Daniel K.", location: "CTO, Halyard Systems", stars: 5, text: "Most shops do software or hardware. CrunchBacon does both, in the same room, on the same timeline. That's the whole reason our device shipped on schedule." },
-  { name: "Alicia P.", location: "Product Lead, Ferro Labs", stars: 5, text: "The iteration speed is unreal. We tested five physical revisions in the time it used to take us to get one back from a contract manufacturer." },
+const PROCESS = [
+  { step: "01", title: "Discovery", desc: "We scope the problem, define the stack, and map dependencies before a line of code ships." },
+  { step: "02", title: "Architecture", desc: "System design, data modeling, and API contracts — the expensive-to-reverse decisions, made first." },
+  { step: "03", title: "Build", desc: "Iterative sprints that put working software in your hands every week, not a big-bang delivery at the end." },
+  { step: "04", title: "Test & Harden", desc: "Automated test coverage, code review, and security and performance passes before anything reaches production." },
+  { step: "05", title: "Deploy & Support", desc: "CI/CD pipelines, monitoring, and a direct line to the engineers who built it — not a ticket queue." },
 ];
 
 export function ConversionSection() {
@@ -100,24 +101,19 @@ export function ConversionSection() {
         </div>
       </div>
 
-      {/* Reviews */}
+      {/* Software Engineering Process */}
       <div className="bg-[#111111] py-24 px-6">
         <div className="max-w-6xl mx-auto">
-          <p className="text-xs tracking-[0.4em] uppercase text-[#ff6b35] mb-4 font-mono">Reviews</p>
+          <p className="text-xs tracking-[0.4em] uppercase text-[#ff6b35] mb-4 font-mono">Software engineering</p>
           <h2 className="text-4xl md:text-5xl text-[#f4f4f2] mb-16" style={{ fontFamily: "'Space Grotesk', 'Helvetica Neue', Arial, sans-serif", fontWeight: 500 }}>
-            Founders noticed the speed.
+            How we take software from idea to production.
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {REVIEWS.map((r) => (
-              <div key={r.name} className="border border-[#f4f4f2]/10 p-8">
-                <div className="flex gap-0.5 mb-4">
-                  {Array.from({ length: r.stars }).map((_, i) => (
-                    <span key={i} className="text-[#ff6b35] text-sm">★</span>
-                  ))}
-                </div>
-                <p className="text-[#f4f4f2]/80 text-sm leading-relaxed mb-6 italic">&ldquo;{r.text}&rdquo;</p>
-                <p className="text-[#f4f4f2] text-xs font-semibold tracking-wider uppercase">{r.name}</p>
-                <p className="text-[#f4f4f2]/40 text-xs mt-0.5">{r.location}</p>
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
+            {PROCESS.map((p) => (
+              <div key={p.step} className="border-t border-[#f4f4f2]/10 pt-6">
+                <span className="block text-sm font-mono text-[#ff6b35] mb-4">{p.step}</span>
+                <h3 className="text-[#f4f4f2] font-semibold text-lg mb-2">{p.title}</h3>
+                <p className="text-[#f4f4f2]/60 text-sm leading-relaxed">{p.desc}</p>
               </div>
             ))}
           </div>
