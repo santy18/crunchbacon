@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <defs>
+    <radialGradient id="vign3" cx="50%" cy="50%" r="75%">
+      <stop offset="0%" stop-color="#0d0d0d"/>
+      <stop offset="100%" stop-color="#020202"/>
+    </radialGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#vign3)"/>
+
+  <!-- left: glowing code / data lines cascading -->
+  <g font-family="monospace" font-size="20" fill="#f4f4f2" filter="url(#glow)">
+    <text x="140" y="220" opacity="0.85">const build = () =&gt; {</text>
+    <text x="180" y="260" opacity="0.7">render(nodes);</text>
+    <text x="180" y="300" opacity="0.55">sync(hardware);</text>
+    <text x="180" y="340" opacity="0.75">optimize(tolerance);</text>
+    <text x="140" y="380" opacity="0.85">};</text>
+    <text x="140" y="440" opacity="0.5">POST /api/prototype/iterate</text>
+    <text x="140" y="480" opacity="0.4">200 OK · 42ms</text>
+  </g>
+  <g stroke="#ff6b35" stroke-width="1.5" opacity="0.6" filter="url(#glow)">
+    <line x1="120" y1="560" x2="740" y2="560"/>
+    <circle cx="120" cy="560" r="4" fill="#ff6b35"/>
+    <circle cx="740" cy="560" r="4" fill="#ff6b35"/>
+  </g>
+
+  <!-- bridge: nozzle laying a line -->
+  <g transform="translate(870,610)" filter="url(#glow)">
+    <path d="M0,0 L120,0" stroke="#ff6b35" stroke-width="6" stroke-linecap="round"/>
+    <path d="M60,-70 L60,4" stroke="#f4f4f2" stroke-width="8" stroke-linecap="round" opacity="0.85"/>
+    <path d="M40,-90 L80,-70 L40,-70 Z" fill="#f4f4f2" opacity="0.85"/>
+  </g>
+
+  <!-- right: wireframe 3D mesh -->
+  <g transform="translate(1300,420)" stroke="#f4f4f2" fill="none" stroke-width="1.5" opacity="0.85" filter="url(#glow)">
+    <path d="M0,120 L220,0 L440,120 L220,240 Z"/>
+    <path d="M0,120 L220,240 L220,420 L0,300 Z" opacity="0.6"/>
+    <path d="M440,120 L220,240 L220,420 L440,300 Z" opacity="0.75"/>
+    <path d="M220,0 L220,240 M0,120 L0,300 M440,120 L440,300 M0,300 L220,420 L440,300" opacity="0.4"/>
+  </g>
+</svg>
