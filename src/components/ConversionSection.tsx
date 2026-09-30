@@ -2,19 +2,19 @@
 import { useState, useRef, useCallback } from "react";
 
 const SERVICES = [
-  { icon: "✦", title: "Product Strategy", desc: "From a rough idea and a napkin sketch to a defined spec, scope, and roadmap." },
-  { icon: "◈", title: "Software & App Engineering", desc: "Full-stack web and mobile builds — the digital infrastructure behind the hardware." },
-  { icon: "◉", title: "Embedded & Firmware", desc: "Sensors, control systems, and electronics integration that make hardware smart." },
-  { icon: "◇", title: "Rapid 3D Prototyping", desc: "CAD, 3D printing, and laser cutting to test form, fit, and function fast." },
-  { icon: "◎", title: "Hardware Design & DFM", desc: "Engineering for manufacturability — BOMs, sourcing, and production-ready parts." },
-  { icon: "△", title: "Testing & Iteration", desc: "Validation cycles and refinement sprints until the prototype proves itself." },
+  { icon: "✦", title: "Product Strategy", desc: "From a rough idea to a defined spec, scope, and roadmap." },
+  { icon: "◈", title: "Web & Mobile Apps", desc: "Full-stack products built with modern frameworks, from MVP to scale." },
+  { icon: "◉", title: "Backend & Cloud", desc: "APIs, data pipelines, and infrastructure that stay fast and reliable under load." },
+  { icon: "◇", title: "AI & Automation", desc: "LLM features, agents, and workflow automation wired into your product." },
+  { icon: "◎", title: "Testing & DevOps", desc: "CI/CD, observability, and QA so every release ships with confidence." },
+  { icon: "△", title: "Prototyping & Hardware", desc: "When software needs a body: embedded firmware, electronics, and 3D-printed prototypes." },
 ];
 
 // Placeholder testimonials — swap in real client quotes before launch.
 const REVIEWS = [
-  { name: "Maria R.", location: "Founder, Reef & Root", stars: 5, text: "We walked in with a napkin sketch and walked out with a working prototype in under three weeks. CrunchBacon moves at the speed a startup actually needs." },
-  { name: "Daniel K.", location: "CTO, Halyard Systems", stars: 5, text: "Most shops do software or hardware. CrunchBacon does both, in the same room, on the same timeline. That's the whole reason our device shipped on schedule." },
-  { name: "Alicia P.", location: "Product Lead, Ferro Labs", stars: 5, text: "The iteration speed is unreal. We tested five physical revisions in the time it used to take us to get one back from a contract manufacturer." },
+  { name: "Maria R.", location: "Founder, Reef & Root", stars: 5, text: "We walked in with a napkin sketch and had a working app in users' hands in under three weeks. CrunchBacon moves at the speed a startup actually needs." },
+  { name: "Daniel K.", location: "CTO, Halyard Systems", stars: 5, text: "Clean architecture, clear communication, and no surprises at launch. When we needed a connected device too, they built that as well, on the same timeline." },
+  { name: "Alicia P.", location: "Product Lead, Ferro Labs", stars: 5, text: "The iteration speed is unreal. We shipped five production releases in the time our old agency took to deliver one." },
 ];
 
 export function ConversionSection() {
@@ -24,6 +24,33 @@ export function ConversionSection() {
 
   const [form, setForm] = useState({ name: "", email: "", phone: "", address: "", notes: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSending(true);
+    setError(false);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          project: form.address,
+          notes: form.notes,
+        }),
+      });
+      if (!res.ok) throw new Error();
+      setSubmitted(true);
+    } catch {
+      setError(true);
+    } finally {
+      setSending(false);
+    }
+  };
 
   const handleSlider = useCallback((e: React.PointerEvent) => {
     const el = sliderRef.current;
@@ -39,7 +66,7 @@ export function ConversionSection() {
       <div className="max-w-6xl mx-auto px-6 py-24">
         <p className="text-xs tracking-[0.4em] uppercase text-[#ff6b35] mb-4 font-mono">What we do</p>
         <h2 className="text-4xl md:text-5xl mb-16" style={{ fontFamily: "'Space Grotesk', 'Helvetica Neue', Arial, sans-serif", fontWeight: 500 }}>
-          Software and hardware, engineered together.
+          Software built to ship. Hardware when you need it.
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {SERVICES.map((s) => (
@@ -140,7 +167,7 @@ export function ConversionSection() {
           </div>
         ) : (
           <form
-            onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}
+            onSubmit={handleSubmit}
             className="flex flex-col gap-5"
           >
             {[
@@ -175,10 +202,14 @@ export function ConversionSection() {
 
             <button
               type="submit"
-              className="mt-2 bg-[#111111] text-[#f4f4f2] py-4 px-8 text-xs tracking-[0.3em] uppercase hover:bg-[#ff6b35] hover:text-[#111111] transition-colors duration-300"
+              disabled={sending}
+              className="mt-2 bg-[#111111] text-[#f4f4f2] py-4 px-8 text-xs tracking-[0.3em] uppercase hover:bg-[#ff6b35] hover:text-[#111111] transition-colors duration-300 disabled:opacity-50"
             >
-              Request Free Consultation
+              {sending ? "Sending..." : "Request Free Consultation"}
             </button>
+            {error && (
+              <p className="text-sm text-red-600">Something went wrong. Please try again.</p>
+            )}
           </form>
         )}
       </div>
@@ -186,7 +217,7 @@ export function ConversionSection() {
       {/* Footer */}
       <footer className="border-t border-[#111111]/10 py-12 px-6 text-center">
         <p className="text-2xl text-[#111111] mb-2" style={{ fontFamily: "'Space Grotesk', 'Helvetica Neue', Arial, sans-serif", fontWeight: 500 }}>CrunchBacon</p>
-        <p className="text-xs text-[#111111]/40 tracking-widest uppercase font-mono">Product Engineering Studio · Miami, Florida</p>
+        <p className="text-xs text-[#111111]/40 tracking-widest uppercase font-mono">Software Engineering Studio · Miami, Florida</p>
         <p className="text-xs text-[#111111]/30 mt-8">© 2026 CrunchBacon. All rights reserved.</p>
       </footer>
     </section>

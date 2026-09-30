@@ -30,7 +30,7 @@ export const CHAPTERS: ChapterConfig[] = [
     pinHeightVh: 200,
     breather: {
       stat: "14 DAYS",
-      label: "Average time from napkin sketch to working prototype.",
+      label: "Average time from kickoff to a working build in your hands.",
     },
   },
   {
@@ -38,7 +38,7 @@ export const CHAPTERS: ChapterConfig[] = [
     id: "arrival",
     label: "Arrival",
     numeral: "02",
-    headline: "But first, the concept.",
+    headline: "It starts with the problem.",
     videoDuration: 8,
     videoUrl:
       "https://d8j0ntlcm91z4.cloudfront.net/user_3GSk4Z8RmdvNGsBlVgLkC7JLui6/hf_20260827_021142_154bd21c-b6a3-4e36-bfa4-58b9a329c6ba.mp4",
@@ -51,7 +51,7 @@ export const CHAPTERS: ChapterConfig[] = [
     id: "thework",
     label: "The Work",
     numeral: "03",
-    headline: "Digital infrastructure.\nPhysical prototyping.\nRapid iteration.",
+    headline: "Full-stack engineering.\nCloud-native systems.\nShipped fast.",
     videoDuration: 15,
     videoUrl:
       "https://d8j0ntlcm91z4.cloudfront.net/user_3GSk4Z8RmdvNGsBlVgLkC7JLui6/hf_20260827_021143_495e3c13-5c86-4024-b886-9ba4ae52fdf7.mp4",
@@ -64,7 +64,7 @@ export const CHAPTERS: ChapterConfig[] = [
     id: "reveal",
     label: "The Reveal",
     numeral: "04",
-    headline: "The physical proof of concept.",
+    headline: "Software that ships.",
     videoDuration: 10,
     videoUrl:
       "https://d8j0ntlcm91z4.cloudfront.net/user_3GSk4Z8RmdvNGsBlVgLkC7JLui6/hf_20260827_021144_93e2bedb-9346-493f-8b3d-d1252843258d.mp4",

@@ -4,10 +4,10 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "CrunchBacon — Engineered for Reality",
   description:
-    "A Miami-based product engineering studio. Digital infrastructure, physical prototyping, rapid iteration — from napkin sketch to working hardware.",
+    "A Miami-based software engineering studio. Web and mobile apps, cloud infrastructure, and AI — from napkin sketch to production, with hardware prototyping when your product needs it.",
   openGraph: {
     title: "CrunchBacon — Engineered for Reality",
-    description: "A cinematic story of building the physical proof of concept.",
+    description: "A cinematic story of building software that ships.",
     type: "website",
   },
 };
