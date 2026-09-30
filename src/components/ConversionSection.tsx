@@ -10,11 +10,39 @@ const SERVICES = [
   { icon: "△", title: "Prototyping & Hardware", desc: "When software needs a body: embedded firmware, electronics, and 3D-printed prototypes." },
 ];
 
-// Placeholder testimonials — swap in real client quotes before launch.
-const REVIEWS = [
-  { name: "Maria R.", location: "Founder, Reef & Root", stars: 5, text: "We walked in with a napkin sketch and had a working app in users' hands in under three weeks. CrunchBacon moves at the speed a startup actually needs." },
-  { name: "Daniel K.", location: "CTO, Halyard Systems", stars: 5, text: "Clean architecture, clear communication, and no surprises at launch. When we needed a connected device too, they built that as well, on the same timeline." },
-  { name: "Alicia P.", location: "Product Lead, Ferro Labs", stars: 5, text: "The iteration speed is unreal. We shipped five production releases in the time our old agency took to deliver one." },
+const PLAYBOOK = [
+  {
+    title: "Before you write a line of code",
+    points: [
+      "Name the one user and the one problem. If you need two, you have two products.",
+      "Write the smallest version that proves people want it, then cut it in half.",
+      "Decide how you'll know it worked: a number, a date, a decision.",
+    ],
+  },
+  {
+    title: "Build, buy, or glue it together",
+    points: [
+      "Buy or use off-the-shelf for anything customers won't notice: auth, payments, email.",
+      "Build the part that is your advantage. That's the code worth owning.",
+      "Glue tools together with automation first. Replace them only when they hurt.",
+    ],
+  },
+  {
+    title: "Red flags in a dev proposal",
+    points: [
+      "One big number and no milestones. You should see something working every week or two.",
+      "No mention of hosting, monitoring, or who fixes it after launch.",
+      "You won't own the repo, the cloud accounts, and the domain on day one.",
+    ],
+  },
+  {
+    title: "Ready for launch?",
+    points: [
+      "Backups exist and someone has actually restored one.",
+      "You'll get an alert before your users tell you it's down.",
+      "Secrets are out of the repo, and there's a way to roll back a bad release.",
+    ],
+  },
 ];
 
 export function ConversionSection() {
@@ -127,24 +155,31 @@ export function ConversionSection() {
         </div>
       </div>
 
-      {/* Reviews */}
+      {/* Playbook */}
       <div className="bg-[#111111] py-24 px-6">
         <div className="max-w-6xl mx-auto">
-          <p className="text-xs tracking-[0.4em] uppercase text-[#ff6b35] mb-4 font-mono">Reviews</p>
-          <h2 className="text-4xl md:text-5xl text-[#f4f4f2] mb-16" style={{ fontFamily: "'Space Grotesk', 'Helvetica Neue', Arial, sans-serif", fontWeight: 500 }}>
-            Founders noticed the speed.
+          <p className="text-xs tracking-[0.4em] uppercase text-[#ff6b35] mb-4 font-mono">The playbook</p>
+          <h2 className="text-4xl md:text-5xl text-[#f4f4f2] mb-4" style={{ fontFamily: "'Space Grotesk', 'Helvetica Neue', Arial, sans-serif", fontWeight: 500 }}>
+            Build it right the first time.
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {REVIEWS.map((r) => (
-              <div key={r.name} className="border border-[#f4f4f2]/10 p-8">
-                <div className="flex gap-0.5 mb-4">
-                  {Array.from({ length: r.stars }).map((_, i) => (
-                    <span key={i} className="text-[#ff6b35] text-sm">★</span>
+          <p className="text-[#f4f4f2]/50 text-sm mb-16 max-w-xl">
+            Four checklists we use on every project. Take them, whether or not you work with us.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {PLAYBOOK.map((card, n) => (
+              <div key={card.title} className="border border-[#f4f4f2]/10 p-8">
+                <p className="text-[#ff6b35] text-xs font-mono mb-3">{String(n + 1).padStart(2, "0")}</p>
+                <h3 className="text-[#f4f4f2] text-xl mb-5" style={{ fontFamily: "'Space Grotesk', 'Helvetica Neue', Arial, sans-serif", fontWeight: 500 }}>
+                  {card.title}
+                </h3>
+                <ul className="flex flex-col gap-3">
+                  {card.points.map((pt) => (
+                    <li key={pt} className="flex gap-3 text-sm text-[#f4f4f2]/70 leading-relaxed">
+                      <span className="text-[#ff6b35] shrink-0">→</span>
+                      <span>{pt}</span>
+                    </li>
                   ))}
-                </div>
-                <p className="text-[#f4f4f2]/80 text-sm leading-relaxed mb-6 italic">&ldquo;{r.text}&rdquo;</p>
-                <p className="text-[#f4f4f2] text-xs font-semibold tracking-wider uppercase">{r.name}</p>
-                <p className="text-[#f4f4f2]/40 text-xs mt-0.5">{r.location}</p>
+                </ul>
               </div>
             ))}
           </div>
