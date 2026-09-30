@@ -6,4 +6,4 @@ services:
       - "3000:3000"
     environment:
       # Use the /webhook/<id> URL (not /webhook-test/) once the n8n workflow is active
-      - CONTACT_WEBHOOK_URL=${CONTACT_WEBHOOK_URL:-https://n8n.crunchbacon.com/webhook-test/502a046a-62a0-4c9a-8e62-87739302016a}
+      - CONTACT_WEBHOOK_URL=${CONTACT_WEBHOOK_URL:-https://n8n.crunchbacon.com/webhook/502a046a-62a0-4c9a-8e62-87739302016a}
