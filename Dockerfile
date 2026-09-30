@@ -9,11 +9,16 @@ COPY . .
 RUN npm run build
 
 # ---- Runtime stage ----
-FROM caddy:2-alpine
+FROM node:24-alpine
+WORKDIR /app
+ENV NODE_ENV=production
+ENV PORT=3000
+ENV HOSTNAME=0.0.0.0
 
-COPY Caddyfile /etc/caddy/Caddyfile
-COPY --from=build /app/out /srv
+COPY --from=build /app/.next/standalone ./
+COPY --from=build /app/.next/static ./.next/static
+COPY --from=build /app/public ./public
 
-EXPOSE 80
+EXPOSE 3000
 
-CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
+CMD ["node", "server.js"]
