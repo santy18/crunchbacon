@@ -253,7 +253,10 @@ export function ConversionSection() {
       <footer className="border-t border-[#111111]/10 py-12 px-6 text-center">
         <p className="text-2xl text-[#111111] mb-2" style={{ fontFamily: "'Space Grotesk', 'Helvetica Neue', Arial, sans-serif", fontWeight: 500 }}>CrunchBacon</p>
         <p className="text-xs text-[#111111]/40 tracking-widest uppercase font-mono">Software Engineering Studio · Miami, Florida</p>
-        <p className="text-xs text-[#111111]/30 mt-8">© 2026 CrunchBacon. All rights reserved.</p>
+        <p className="text-xs text-[#111111]/30 mt-8">
+          © 2026 CrunchBacon. All rights reserved. ·{" "}
+          <a href="/privacy" className="underline hover:text-[#ff6b35]">Privacy</a>
+        </p>
       </footer>
     </section>
   );
